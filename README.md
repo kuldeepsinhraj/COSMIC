@@ -30,41 +30,41 @@
 
 ## Overview
 
-The CO₂ER database is a publicly available repository of computed molecular properties and simulation-ready inputs for the study of organic solvents in electrochemical CO₂ reduction (CO₂ER). The data spans quantum chemical (DFT), thermodynamic (COSMO-RS), and classical molecular dynamics (MD) calculations and covers solvents from 11 chemical families.
+The CO₂ER database is a publicly available repository of computed molecular properties and simulation-ready inputs for the study of organic solvents in electrochemical CO₂ reduction (CO₂ER). The data spans quantum chemical (DFT), thermodynamic (COSMO-RS), and classical molecular dynamics (MD) calculations and covers solvents from 11 chemical classes.
 
-This resource includes DFT-optimized structures, binding energies, electronic descriptors (HOMO, LUMO, IP, EA), MD-derived solvation structure and diffusion data, and COSMO-RS-predicted properties such as CO₂ solubility and viscosity. It is intended to support high-throughput screening, simulation, and machine learning model development for CO₂ER electrolyte design.
+The dataset includes DFT-optimized geometries (in XYZ format) and a range of DFT-computed properties such as binding energies, partial atomic charges, polarizabilities, ionization potentials, electron affinities, and HOMO–LUMO energies. It also contains MD-derived properties like radial distribution functions, coordination numbers, and diffusion coefficients, as well as COSMO-RS-predicted properties such as CO₂ solubility, viscosity, and more. This resource is designed to support high-throughput screening, molecular simulation, and machine learning model development for CO₂ER electrolyte discovery.
 
 ---
 
 ## COSMO-RS
 
 ### Pure_solvent_properties_data.csv
-Contains 24 solvent properties predicted using COSMO-RS, including melting point, flash point, viscosity, van der Waals volume, polarity, and more. These properties are useful for assessing solvent stability and CO₂ compatibility.
+Contains 24 solvent properties predicted using COSMO-RS, including melting point, flash point, viscosity, van der Waals volume, polarity, and more.
 
 ### Solubility_co2.csv
-Estimated solubility of CO₂ in pure organic solvents, as predicted by COSMO-RS. Data is critical for evaluating the absorption potential of solvents in CO₂ER.
+Estimated solubility of CO₂ in pure organic solvents, as predicted by COSMO-RS.
 
 ### Cosmo_files
-DFT-derived COSMO files used as input for COSMO-RS simulations. Prepared using Gaussian via MISPR workflows.
+DFT-derived COSMO files used as input for COSMO-RS simulations. Prepared using DFT Gaussian calculation via MISPR workflows.
 
 ---
 
 ## Classical Molecular Dynamics
 
 ### Coordination_Numbers (CN)
-Raw CSV files with coordination numbers between CO₂ (carbon atom) and surrounding electrolyte components including solvent, salt cation (TBA⁺), and anion (BF₄⁻).
+Raw CSV files with coordination numbers between CO₂ (carbon atom) and surrounding electrolyte solvent.
 
 ### Diffusion
 CSV files reporting the diffusion coefficients of each species (TBA⁺, BF₄⁻, solvent, CO₂) in electrolyte systems with 0.1 M [TBA⁺][BF₄⁻] and 0.1 M CO₂. Includes standard deviations and R² values.
 
 ### Force_Fields
-OPLS-AA-compatible JSON force field files for each solvent. These are required for running classical MD simulations.
+json files containing the solvent force field parameters (OPLS/AA) used to run the MD simulations. 
 
 ### MD_Data_files
-LAMMPS-compatible `.data` files describing initial atomic positions, atom types, and topology for electrolyte systems.
+LAMMPS-compatible data files describing initial atomic positions, atom types, and topology for electrolyte systems.
 
 ### MD_templates
-Reusable LAMMPS input scripts for various simulation stages: energy minimization, NPT/NVT equilibration, melting, quenching, and production.
+LAMMPS template files used to run the following MD steps: energy minimization, NPT equilibration, melting and quenching, and NVT production.
 
 ### Radial_Distribution_Functions (RDF)
 CSV files containing RDF data between CO₂ atoms (C and O) and the center of mass of TBA⁺, BF₄⁻, and solvent molecules. Useful for analyzing solvation shell structure.
@@ -76,43 +76,42 @@ Metadata file summarizing MD setup details: number of molecules, atom types, ini
 
 ## Machine Learning
 
-This section (coming soon) will include pre-trained ML models for predicting solvent properties relevant to CO₂ER: CO₂ solubility, viscosity, ionization potential, and electron affinity. 
+This section includes pre-trained ML models for predicting solvent properties relevant to CO₂ER: CO₂ solubility, viscosity, ionization potential, and electron affinity. 
 
-Each model will be trained on computed datasets using four classes of descriptors:
+Each model is trained on computed datasets using four classes of descriptors:
 - RDKit molecular descriptors
 - Mordred chemical descriptors
-- DFT-based descriptors (e.g., HOMO, LUMO, charge)
-- COSMO-RS-derived thermodynamic features
+- DFT-based descriptors 
+- COSMO-RS-derived descriptors
 
 ---
 
 ## DFT Computed Properties
 
 ### Binding_Energy
-DFT-calculated binding energies for solvent–CO₂ complexes. Stored in raw JSON format, including all metadata and convergence details.
+DFT-calculated binding energies for solvent–CO₂ complexes. Stored in raw JSON format, including all metadata.
 
 ### Electron_Affinity
-DFT-computed electron affinity values for each solvent. Includes frontier orbital data and solvent geometries.
+Raw JSON files containing DFT calculations of the solvent electron affinity, including all associated metadata.
 
 ### Ionization_Potentials
-DFT-computed ionization potentials for each solvent. Includes both vertical and adiabatic IP values, where applicable.
+Raw JSON files containing DFT calculations of the solvent ionization potentials, including all associated metadata.
 
 ### DFT_Computed_Properties.csv
-Consolidated table of 13 molecular properties from DFT, including HOMO/LUMO energies, SCF energy, dipole moment, polarizability, and Mulliken charges.
+Consolidated table of 13 molecular properties from DFT, including HOMO/LUMO energies, SCF energy, dipole moment, polarizability, charges and more.
 
 ---
 
 ## Scripts
 
-- `run_md.py`: Automates LAMMPS-based MD simulations using MISPR for systems with [TBA⁺][BF₄⁻] and CO₂ in various solvents.
-- `run_ip_ea.py`: Automates IP and EA calculations using Gaussian via MISPR.
-- `run_be.py`: Automates binding energy calculations between solvents and CO₂.
-
+- `run_md.py`: script for running the automated MD simulations of the electrolyte systems composed of 0.1 M [TBA⁺][BF₄⁻] salt and 0.1 M CO₂ in various solvents system using MISPR
+- `run_ip_ea.py`: script for running the automated IP and EA simulations of the solvents system using MISPR.
+- `run_be.py`: script for running the automated binding energy simulations solvents system using MISPR.
 ---
 
 ## XYZ Files
 
-XYZ format geometry files of DFT-optimized solvent molecules. Useful for visualization or preparing inputs for other simulation workflows.
+XYZ format geometry files of DFT-optimized solvent molecules. 
 
 ---
 
