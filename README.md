@@ -15,6 +15,26 @@
   * [Radial_Distribution_Functions (RDF)](#radial_distribution_functions-rdf)
   * [Solvent_data.csv](#solvent_datacsv)
 * [Machine Learning](#machine-learning)
+   * [Data](#data)
+     * [Chemical Class](#chemical_class)
+     * [Data_computed_properties](#Data_computed_properties)
+     * [Descriptors](#descriptors)
+     * [df_filtered.csv](#df_filtered.csv)
+     * [df_filtered_ip.csv](#df_filtered_ip.csv)
+     * [filtered_ea_clean.csv](#filtered_ea_clean.csv)
+   * [src](#src)
+     - [catboost_model_ea.cbm](#catboost_model_ea.cbm)
+     - [catboost_model_ea_dft.cbm](#catboost_model_ea_dft.cbm)
+     - [cgb_ea_model.json](#cgb_ea_model.json)
+     - [data_merge.ipynb](#data_merge.ipynb)
+     - [model_catboost_ea.ipynb](#model_catboost_ea.ipynb)
+     - [model_rf_ip.ipynb](#model_rf_ip.ipynb)
+     - [model_viscosity_xgb.ipynb](#model_viscosity_xgb.ipynb)
+     - [model_xgboost_solubility.ipynb](#model_xgboost_solubility.ipynb)
+     - [preprocess.ipynb](#preprocess.ipynb)
+     - [preprocess_ea.ipynb](#preprocess_ea.ipynb)
+     - [preprocess_ip.ipynb](#preprocess_ip.ipynb)
+     - [xgb_ea_model.json](#xgb_ea_model.json)
 * [DFT Computed Properties](#dft-computed-properties)
   * [Binding_Energy](#binding_energy)
   * [Electron_Affinity](#electron_affinity)
@@ -78,11 +98,58 @@ Metadata file summarizing MD setup details: number of molecules, atom types, ini
 
 This section includes pre-trained ML models for predicting solvent properties relevant to CO₂ER: CO₂ solubility, viscosity, ionization potential, and electron affinity. 
 
-Each model is trained on computed datasets using four classes of descriptors:
+### Data
+Data Folder
+### - chemical_class
+Folder containing chemical_class.csv which has detailed description of chemical class for each molecule
+
+### - Data_computed_properties
+Folder containing chemical_class.csv which has detailed description of chemical class for each molecule
+
+### - Descriptors
 - RDKit molecular descriptors
 - Mordred chemical descriptors
-- DFT-based descriptors 
-- COSMO-RS-derived descriptors
+- dft_descriptors.csv DFT-based descriptors 
+- cosmors_descriptors.csv: COSMO-RS-derived descriptors
+
+### - df_filtered.csv
+Filtered data containing 400 - 500 colummns from the main df_merged.csv
+
+### - df_filtered_ip.csv
+Filtered data for Ionization Potential containing 100 colummns from the main df_filtered.csv
+
+### - filtered_ea_clean.csv
+Filtered data for Electron Affinity containing 100 colummns from the main df_filtered.csv
+
+### src
+Source code Folder
+
+### - catboost_model_ea.cbm
+   Saved EA model
+### - catboost_model_ea_dft.cbm
+   Saved EA model with dft descriptors
+### - cgb_ea_model.json
+   Saved EA model in json format
+### - data_merge.ipynb
+   Script to merge data of different molecules and with their respective descriptors
+### - model_catboost_ea.ipynb
+   Script for EA model with CatBoost Algorithm
+### - model_rf_ip.ipynb
+   Script for IP model with Random Forest Algorithm
+### - model_viscosity_xgb.ipynb
+   Script for Viscosity model with XGBoost Algorithm
+### - model_xgboost_solubility.ipynb
+   Script for Solubility model with XGBoost Algorithmn
+### - preprocess.ipynb
+   Script for initial preprocessing to create df_filtered.csv data
+### - preprocess_ea.ipynb
+   Script for further preprocessing of EA data to create filtered_ea_clean.csv data
+### - preprocess_ip.ipynb
+   Script for further preprocessing of IP create df_filtered_ip.csv data
+### - xgb_ea_model.json
+   Script for EA model with XGBoost Algorithmn
+
+
 
 ---
 
