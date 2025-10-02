@@ -1,4 +1,4 @@
-# CO₂ER Database
+# COSMIC Database
 
 ## Contents
 * [Overview](#overview)
