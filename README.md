@@ -1,4 +1,4 @@
-# COSMIC Database
+# COSMIC(CO₂ Solvent Materials Informatics Collection) Database
 <img width="875" height="473" alt="cosmic_logo" src="https://github.com/user-attachments/assets/b8161d00-06da-4626-9f0d-c6aee2e23009" />
 
 
