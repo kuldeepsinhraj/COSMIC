@@ -1,4 +1,5 @@
 # COSMIC Database
+<img width="1024" height="1024" alt="cosmic_2" src="https://github.com/user-attachments/assets/331d1410-08a2-4810-803c-4654abf413ba" />
 
 ## Contents
 * [Overview](#overview)
